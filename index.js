@@ -9,7 +9,13 @@ const users = [
   { id: 3, name: "Sabila", email: "sabila@gmail.com" },
 ];
 app.use(cors());
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
 
+mongodb+srv://nayem:<password>@cluster0.dafmrk2.mongodb.net/?retryWrites=true&w=majority
 async function run() {
   try {
     const database = client.db("insertDB");
