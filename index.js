@@ -22,6 +22,12 @@ async function run() {
   try {
     const userCollection = client.db("nodeMongoCrud").collection("users");
 
+    app.get("/users", async (req, res) => {
+      const query = {};
+      const cursor = userCollection.find(query);
+      const users = await cursor.toArray();
+      res.send(users);
+    });
     app.post("/users", async (req, res) => {
       const user = req.body;
       console.log(user);
@@ -35,6 +41,10 @@ run().catch((err) => console.log(err));
 app.get("/", (req, res) => {
   res.send("This is my homepage");
 });
+// app.get("/users", (req, res) => {
+//   res.send("This is my users");
+//   console.log("users page");
+// });
 
 app.listen(port, () => {
   console.log("my app is running on", port);
